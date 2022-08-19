@@ -1,0 +1,85 @@
+name: mac-release-actions-workflow
+on: [push]
+#     # Sequence of patterns matched against refs/tags
+#     tags:
+#       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+jobs:
+  xcode:
+    runs-on: macos-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Build
+        run: brew install ninja && cmake -B build -D CMAKE_BUILD_TYPE=RelWithDebInfo -G Ninja -S . && ninja -C build
+      
+      - name: run
+        run: cd build/bin && ./HelloWorld
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+# jobs:
+#   build:
+#     name: Create Release
+#     runs-on: windows-2019
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+        
+# #       - name: curl x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
+# #         shell: cmd
+# #         run:  cd /d ${{ github.workspace }} && curl https://github.com/2641797006/c/blob/master/GCC-zip/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z?raw=true -L --output x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z && dir && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
+
+#       - uses: actions-rs/toolchain@v1
+#         with:
+#           target: x86_64-pc-windows-gnu
+#           toolchain: stable
+          
+#       - uses: actions-rs/cargo@v1
+#         with:
+#           command: build
+#           args: --release --all-features
+          
+# #       - name: set PATH, check mingw version, cmake generate, build and install
+# #         shell: cmd
+# #         run: |
+# #             set PATH=^
+# #             ${{ github.workspace }}\mingw64;^
+# #             ${{ github.workspace }}\mingw64\bin;^
+# #             ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;^
+# #             gcc --version &&^
+# #             cd dlib && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build &&^
+# #             cd build && cmake --build . && cmake --install . 
+            
+#       - name: Archive Release
+#         uses: thedoctor0/zip-release@master
+#         with:
+#           type: 'zip'
+#           directory: "target/release"
+#           path: "metronome.exe"
+#           filename: "metronome.zip"
+          
+#       - name: Release prebuilt
+#         uses: ncipollo/release-action@v1
+#         with:
+#           artifacts: "target/release/metronome.zip"
+#           allowUpdates: true
+#           token: ${{ secrets.GITHUB_TOKEN }}
